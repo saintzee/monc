@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
-const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
-const asset = (path) => `${BASE}${path}`;
+const asset = (path) => path.replace(/^\//, "");
 
 const YELLOW = "#F7FF16";
 const DARK = "#111111";
