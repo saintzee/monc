@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
+const asset = (path) => `${BASE}${path}`;
+
 const YELLOW = "#F7FF16";
 const DARK = "#111111";
 const DARKER = "#0a0a0a";
 const PINK = "#FF36D2";
 
 const MONCLogo = ({ height = 28 }) => (
-  <img src="/assets/monclogo.svg" alt="MONC" style={{ height, display: "block" }} />
+  <img src={asset("/assets/monclogo.svg")} alt="MONC" style={{ height, display: "block" }} />
 );
 
 const MONCMark = ({ height = 28, color = "white" }) => (
@@ -19,7 +22,7 @@ const MONCMark = ({ height = 28, color = "white" }) => (
 );
 
 const PacManIcon = ({ size = 20 }) => (
-  <img src="/assets/pacman.svg" alt="" width={size} height={size} style={{ display: "block" }} />
+  <img src={asset("/assets/pacman.svg")} alt="" width={size} height={size} style={{ display: "block" }} />
 );
 
 const Ghost = ({ size = 28, color = PINK }) => (
@@ -34,63 +37,63 @@ const Ghost = ({ size = 28, color = PINK }) => (
 
 const signatureCocktails = [
   {
-    id: 1, name: "ALCHIMISTA CURIOSO", price: 10, image: "/assets/cocktails/alchimista-curioso.jpg",
+    id: 1, name: "ALCHIMISTA CURIOSO", price: 10, image: asset("/assets/cocktails/alchimista-curioso.jpg"),
     spirit: "Brandy", spiritDate: "1100-1200dc", spiritOrigin: "Arabia Saudita", century: "XII",
     ingredients: ["Brandy", "Melograno/Curcuma", "Zafferano", "Maraschino"],
     profile: { acido: 2, dolce: 2, amaro: 2, secco: 2, intenso: 2 },
     story: "Tanto tempo fa, nei deserti del Medio Oriente, un alchimista curioso osservava il vino bollire sotto il sole. Per gioco, sigillò una pentola e raccolse le gocce che cadevano fredde in una ciotola. Le assaggiò: fuoco liquido, limpido come acqua, ma con l'anima del vino. Lo chiamò \"aqua vitae\", l'acqua della vita. I monaci europei ne fecero un elisir, i medici lo prescrissero come cura, e i poeti lo cantarono come ispirazione.",
   },
   {
-    id: 2, name: "BANDITO PASSIONALE", price: 12, image: "/assets/cocktails/bandito-passionale.jpg",
+    id: 2, name: "BANDITO PASSIONALE", price: 12, image: asset("/assets/cocktails/bandito-passionale.jpg"),
     spirit: "Grappa", spiritDate: "1200dc", spiritOrigin: "Italia", century: "XIII",
     ingredients: ["Grappa barricata", "Castagne", "Vaniglia", "Passion Fruit", "Lime", "Pepe", "Spuma Pere"],
     profile: { acido: 3, dolce: 2, amaro: 1, secco: 1, intenso: 2 },
     story: "In un piccolo villaggio sardo, i contadini distillavano in segreto una grappa forte e profumata. Per sfuggire ai controlli del Regno, la nascondevano sottoterra, segnando il punto con un filo di ferro che spuntava appena dal suolo. Così, solo loro sapevano dove trovarla. Quando la legge si allentò, la grappa riemerse alla luce, e il nome rimase: filu 'e ferru, il \"filo di ferro\".",
   },
   {
-    id: 3, name: "SHOCK UMAMI", price: 12, image: "/assets/cocktails/shock-umami.jpg",
+    id: 3, name: "SHOCK UMAMI", price: 12, image: asset("/assets/cocktails/shock-umami.jpg"),
     spirit: "Bitter", spiritDate: "1200dc", spiritOrigin: "Italia", century: "XIII",
     ingredients: ["Bitter", "Liquore al Peperone", "Fichi e Wasabi", "Agave", "Tonica"],
     profile: { acido: 2, dolce: 2, amaro: 2, secco: 2, intenso: 2 },
     story: "Il bitter nasce nell'Italia dell'Ottocento come rimedio digestivo a base di erbe amare. Farmacisti e liquoristi sperimentano ricette sempre nuove, finché qualcuno ha un'intuizione semplice ma geniale: rendere l'amaro anche buono. Da quel momento il bitter esce dalla farmacia ed entra nei bar, diventando protagonista dell'aperitivo italiano.",
   },
   {
-    id: 4, name: "DRUNK SANTA CLAUS", price: 8, image: "/assets/cocktails/drunk-santa-claus.jpg",
+    id: 4, name: "DRUNK SANTA CLAUS", price: 8, image: asset("/assets/cocktails/drunk-santa-claus.jpg"),
     spirit: "Vodka", spiritDate: "1400dc", spiritOrigin: "Polonia", century: "XV",
     ingredients: ["Vodka al panettone", "Sciroppo ai canditi", "Arancia", "Limone"],
     profile: { acido: 2, dolce: 2, amaro: 1, secco: 1, intenso: 2 },
     story: "Nata tra le nebbie della Russia o della Polonia (ancora oggi nessuno vuole cedere il merito), la vodka è diventata celebre per una qualità precisa: non avere sapore. È l'amica discreta dei cocktail, il distillato che non giudica. Nei secoli ha curato raffreddori, acceso rivoluzioni e cancellato ricordi.",
   },
   {
-    id: 5, name: "POP FASHIONED", price: 11, image: "/assets/cocktails/pop-fashioned.jpg",
+    id: 5, name: "POP FASHIONED", price: 11, image: asset("/assets/cocktails/pop-fashioned.jpg"),
     spirit: "Whisky", spiritDate: "1500dc", spiritOrigin: "Scozia/Irlanda", century: "XVI",
     ingredients: ["Whisky", "Sciroppo Pop Corn", "Angostura", "Coca Cola"],
     profile: { acido: 5, dolce: 4, amaro: 2, secco: 1, intenso: 3 },
     story: "In una valle velata di nebbia, un monaco distillò per caso l'anima dell'orzo: uisge beatha, \"acqua di vita\". Nascosta in botti di rovere, la miscela maturò, trasformandosi in oro liquido. Non era solo un drink: era memoria, fuoco, tempo. Dai pascoli delle Highlands ai salotti dei re, il whisky ha attraversato secoli.",
   },
   {
-    id: 6, name: "C'È DI MEZZO IL MARE", price: 13, image: "/assets/cocktails/ce-di-mezzo-il-mare.jpg",
+    id: 6, name: "C'È DI MEZZO IL MARE", price: 13, image: asset("/assets/cocktails/ce-di-mezzo-il-mare.jpg"),
     spirit: "Gin", spiritDate: "1600dc", spiritOrigin: "Olanda", century: "XVII",
     ingredients: ["Gin Grifu", "Basilico", "Vermouth Dry", "Pomodoro", "Salamoia"],
     profile: { acido: 1, dolce: 1, amaro: 2, secco: 4, intenso: 5 },
     story: "Il gin è nato come medicina: un distillato chiaro, profumato di ginepro, pensato per curare. Poi arrivò a Londra, e tutto cambiò. Nel 1700, il gin divenne così economico e diffuso da invadere le strade. Fu un'epoca di eccessi e disperazione, passata alla storia come la Gin Craze. Oggi il gin è tornato raffinato, elegante, creativo.",
   },
   {
-    id: 7, name: "RESPIRO", price: 8, image: "/assets/cocktails/respiro.jpg",
+    id: 7, name: "RESPIRO", price: 8, image: asset("/assets/cocktails/respiro.jpg"),
     spirit: "Gin", spiritDate: "1600dc", spiritOrigin: "Olanda", century: "XVII",
     ingredients: ["Gin", "Zucchero", "Lime", "Menta", "Kiwi"],
     profile: { acido: 4, dolce: 3, amaro: 1, secco: 1, intenso: 2 },
     story: "Il gin nasce come medicina, un distillato al ginepro pensato per curare. Poi arrivò a Londra e, nel '700, diventò così economico da invadere le strade. Fu la Gin Craze, un'epoca di eccessi e disperazione. Oggi il gin è tornato elegante e creativo, ma ogni sorso porta ancora quell'eco. Questo drink è un omaggio: equilibrio tra luce e ombra.",
   },
   {
-    id: 8, name: "WILLY WONKA", price: 8, image: "/assets/cocktails/willy-wonka.jpg",
+    id: 8, name: "WILLY WONKA", price: 8, image: asset("/assets/cocktails/willy-wonka.jpg"),
     spirit: "Rum", spiritDate: "1700dc", spiritOrigin: "Caraibi", century: "XVIII",
     ingredients: ["Rum al cioccolato", "Panna", "Cocco", "Zucchero"],
     profile: { acido: 1, dolce: 4, amaro: 1, secco: 1, intenso: 3 },
     story: "Così nacque il primo distillato: non solo una bevanda, ma una magia alchemica che trasformava l'umile uva in spirito, e lo spirito... in leggenda. I monaci europei ne fecero un elisir, i medici lo prescrissero come cura, e i poeti lo cantarono come ispirazione.",
   },
   {
-    id: 9, name: "TEQUILERO", price: 12, image: "/assets/cocktails/tequilero.jpg",
+    id: 9, name: "TEQUILERO", price: 12, image: asset("/assets/cocktails/tequilero.jpg"),
     spirit: "Tequila", spiritDate: "1800dc", spiritOrigin: "Messico", century: "XIX",
     ingredients: ["Tequila", "Mezcal", "Liquore al peperoncino", "Zucchero", "Lime", "Soda al lampone e peperoncino"],
     profile: { acido: 2, dolce: 2, amaro: 2, secco: 1, intenso: 3 },
@@ -130,8 +133,8 @@ const softDrinks = [
 ];
 
 const food = [
-  { id: 301, name: "TACOS", price: 6, image: "/assets/food/tacos.jpeg", description: "A scelta tra pollo, pulled pork e veggy.", ingredients: ["Tortilla", "Pollo / Pulled Pork / Veggy", "Guacamole", "Salsa Chili", "Coriandolo"] },
-  { id: 302, name: "BAO", price: 7, image: "/assets/food/bao.jpeg", description: "Soffice panino al vapore con carne sfilacciata.", ingredients: ["Bao al vapore", "Pulled Pork", "Hoisin", "Cetriolo", "Cipollotto"] },
+  { id: 301, name: "TACOS", price: 6, image: asset("/assets/food/tacos.jpeg"), description: "A scelta tra pollo, pulled pork e veggy.", ingredients: ["Tortilla", "Pollo / Pulled Pork / Veggy", "Guacamole", "Salsa Chili", "Coriandolo"] },
+  { id: 302, name: "BAO", price: 7, image: asset("/assets/food/bao.jpeg"), description: "Soffice panino al vapore con carne sfilacciata.", ingredients: ["Bao al vapore", "Pulled Pork", "Hoisin", "Cetriolo", "Cipollotto"] },
   { id: 303, name: "NACHOS", price: 6, image: "", description: "Tortilla chips croccanti con le nostre salse.", ingredients: ["Tortilla Chips", "Salsa Cheddar", "Guacamole", "Jalapeño", "Panna Acida"] },
 ];
 
@@ -669,7 +672,7 @@ const MenuScreen = () => {
       ) : (
         <>
           {/* ─── SIGNATURE COCKTAILS (SPAZIO TEMPO) ─── */}
-          <SectionHeader title="Spazio Tempo" svgSrc="/assets/spaziotempo-horizontal.svg" />
+          <SectionHeader title="Spazio Tempo" svgSrc={asset("/assets/spaziotempo-horizontal.svg")} />
           <div style={{ display: "flex", flexDirection: "column", gap: 5, marginBottom: 28 }}>
             {signatureCocktails.map((c, i) => (
               <CocktailCard key={c.id} cocktail={c} onClick={() => { setSelected({ section: "signature", index: i }); window.scrollTo(0, 0); }} />
@@ -721,7 +724,7 @@ const MenuScreen = () => {
           }}>
             <div style={{ position: "relative", marginBottom: 16 }}>
               <img
-                src="/assets/images/aperimonc.jpg"
+                src={asset("/assets/images/aperimonc.jpg")}
                 alt="AperiMONC"
                 style={{ width: "100%", aspectRatio: "1", objectFit: "cover", display: "block", borderRadius: 2 }}
               />
