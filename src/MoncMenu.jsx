@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const asset = (path) => path.replace(/^\//, "");
+const asset = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
 
 const YELLOW = "#F7FF16";
 const DARK = "#111111";
