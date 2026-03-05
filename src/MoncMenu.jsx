@@ -401,15 +401,9 @@ const CocktailDetail = ({ cocktail, onBack }) => {
         ← MENU
       </button>
 
-      {/* Hero: image + info — side by side on desktop, stacked on mobile */}
-      <div style={{
-        display: "flex", flexWrap: "wrap", gap: 24, marginBottom: 24,
-      }}>
+      <div style={{ marginBottom: 24 }}>
         {cocktail.image && (
-          <div style={{
-            width: "100%", maxWidth: 280, aspectRatio: "343 / 459",
-            overflow: "hidden", flexShrink: 0,
-          }}>
+          <div style={{ width: "100%", aspectRatio: "343 / 459", overflow: "hidden", marginBottom: 16 }}>
             <img
               src={cocktail.image}
               alt={cocktail.name}
@@ -417,7 +411,7 @@ const CocktailDetail = ({ cocktail, onBack }) => {
             />
           </div>
         )}
-        <div style={{ flex: 1, minWidth: 200, display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
           {/* Name + Price */}
           {cocktail.century && (
             <span style={{
@@ -566,13 +560,12 @@ const FoodDetail = ({ item, onBack }) => {
         ← MENU
       </button>
 
-      <div style={{
-        display: "flex", flexWrap: "wrap", gap: 24, marginBottom: 24,
-      }}>
+      <div style={{ marginBottom: 24 }}>
         <div style={{
-          width: "100%", maxWidth: 280, aspectRatio: "1 / 1",
-          overflow: "hidden", flexShrink: 0, background: "#1a1a1a",
+          width: "100%", aspectRatio: "1 / 1",
+          overflow: "hidden", background: "#1a1a1a",
           display: "flex", alignItems: "center", justifyContent: "center",
+          marginBottom: 16,
         }}>
           {item.image ? (
             <img
@@ -587,7 +580,7 @@ const FoodDetail = ({ item, onBack }) => {
             }}>no image</span>
           )}
         </div>
-        <div style={{ flex: 1, minWidth: 200, display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
           <h2 style={{
             fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(36px,9vw,56px)",
             color: "white", margin: "0 0 8px", lineHeight: .95, letterSpacing: 1,
