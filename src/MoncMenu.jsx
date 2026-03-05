@@ -625,6 +625,15 @@ const MenuScreen = () => {
   const [vis, setVis] = useState(false);
   useEffect(() => { setTimeout(() => setVis(true), 100); }, []);
 
+  // Preload all detail images in the background while user browses the list
+  useEffect(() => {
+    const srcs = [
+      ...signatureCocktails.map(c => c.image),
+      ...food.map(f => f.image).filter(Boolean),
+    ];
+    srcs.forEach(src => { if (src) { const img = new Image(); img.src = src; } });
+  }, []);
+
   const getItemFromSelected = () => {
     if (!selected) return null;
     if (selected.section === "signature") return signatureCocktails[selected.index];
