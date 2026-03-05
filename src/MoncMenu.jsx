@@ -236,11 +236,14 @@ const SimpleItem = ({ item }) => (
   </div>
 );
 
-const CocktailCard = ({ cocktail, onClick }) => (
-  <div onClick={onClick} style={{
-    background: "#141414", border: "1px solid #1e1e1e", padding: "16px 18px",
-    cursor: "pointer", transition: "border-color .3s", position: "relative", overflow: "hidden",
-  }}
+const CocktailCard = ({ cocktail, onClick, index = 0 }) => (
+  <div onClick={onClick}
+    className="card-lift card-enter"
+    style={{
+      background: "#141414", border: "1px solid #1e1e1e", padding: "16px 18px",
+      cursor: "pointer", position: "relative", overflow: "hidden",
+      animationDelay: `${index * 55}ms`,
+    }}
     onMouseEnter={e => { e.currentTarget.style.borderColor = "#333"; }}
     onMouseLeave={e => { e.currentTarget.style.borderColor = "#1e1e1e"; }}
   >
@@ -286,11 +289,14 @@ const CocktailCard = ({ cocktail, onClick }) => (
   </div>
 );
 
-const FoodCard = ({ item, onClick }) => (
-  <div onClick={onClick} style={{
-    background: "#141414", border: "1px solid #1e1e1e", padding: "16px 18px",
-    cursor: "pointer", transition: "border-color .3s", position: "relative", overflow: "hidden",
-  }}
+const FoodCard = ({ item, onClick, index = 0 }) => (
+  <div onClick={onClick}
+    className="card-lift card-enter"
+    style={{
+      background: "#141414", border: "1px solid #1e1e1e", padding: "16px 18px",
+      cursor: "pointer", position: "relative", overflow: "hidden",
+      animationDelay: `${index * 55}ms`,
+    }}
     onMouseEnter={e => { e.currentTarget.style.borderColor = "#333"; }}
     onMouseLeave={e => { e.currentTarget.style.borderColor = "#1e1e1e"; }}
   >
@@ -320,8 +326,6 @@ const FoodCard = ({ item, onClick }) => (
 
 /* ─── INTRO SCREEN ─── */
 const IntroScreen = ({ onEnter }) => {
-  const [vis, setVis] = useState(false);
-  useEffect(() => { setTimeout(() => setVis(true), 100); }, []);
 
   return (
     <div style={{
@@ -338,36 +342,20 @@ const IntroScreen = ({ onEnter }) => {
         width: 500, height: 500, background: "radial-gradient(circle,rgba(139,92,246,.12),transparent 70%)",
         pointerEvents: "none",
       }} />
-      <div style={{
-        opacity: vis ? 1 : 0, transform: vis ? "translateY(0)" : "translateY(30px)",
-        transition: "all .8s ease", textAlign: "center", maxWidth: 600, position: "relative", zIndex: 1,
-      }}>
-        <div style={{ marginBottom: 30, display: "flex", justifyContent: "center" }}><MONCLogo height={60} /></div>
-        <h1 style={{
-          fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(36px, 10vw, 64px)",
-          color: "white", letterSpacing: 2, lineHeight: 1, margin: "0 0 12px",
-        }}>MENU</h1>
-        <p style={{
-          fontFamily: "'Absans',sans-serif", fontSize: 14, color: "#aaa",
-          lineHeight: 1.7, maxWidth: 480, margin: "0 auto 16px",
-        }}>
-          Benvenuti da MONC, <span style={{ color: "white", fontWeight: 600 }}>la vostra cocktaileria di quartiere.</span><br />Signature cocktails, classici rivisitati, birre, vini e tanto altro — tutto pensato per farvi sentire a casa.
-        </p>
-        <p style={{
-          fontFamily: "'Absans',sans-serif", fontSize: 13, color: "#666",
-          lineHeight: 1.7, maxWidth: 480, margin: "0 auto 40px",
-        }}>
-          Sedetevi, sfogliate il menu e lasciatevi guidare dal gusto.
-        </p>
-
-        <button onClick={onEnter} style={{
-          fontFamily: "'Bebas Neue',sans-serif", fontSize: 18, letterSpacing: 3,
-          background: YELLOW, color: DARK, border: "none", padding: "14px 44px",
-          cursor: "pointer", transition: "all .3s",
-        }}
-          onMouseEnter={e => { e.target.style.transform = "scale(1.05)"; }}
-          onMouseLeave={e => { e.target.style.transform = "scale(1)"; }}
-        >ENTRA NEL MENU</button>
+      <div style={{ textAlign: "center", maxWidth: 600, position: "relative", zIndex: 1 }}>
+        {[
+          <div key="logo" style={{ marginBottom: 30, display: "flex", justifyContent: "center" }}><MONCLogo height={60} /></div>,
+          <h1 key="title" style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(36px, 10vw, 64px)", color: "white", letterSpacing: 2, lineHeight: 1, margin: "0 0 12px" }}>MENU</h1>,
+          <p key="desc" style={{ fontFamily: "'Absans',sans-serif", fontSize: 14, color: "#aaa", lineHeight: 1.7, maxWidth: 480, margin: "0 auto 16px" }}>
+            Benvenuti da MONC, <span style={{ color: "white", fontWeight: 600 }}>la vostra cocktaileria di quartiere.</span><br />Signature cocktails, classici rivisitati, birre, vini e tanto altro — tutto pensato per farvi sentire a casa.
+          </p>,
+          <p key="sub" style={{ fontFamily: "'Absans',sans-serif", fontSize: 13, color: "#666", lineHeight: 1.7, maxWidth: 480, margin: "0 auto 40px" }}>
+            Sedetevi, sfogliate il menu e lasciatevi guidare dal gusto.
+          </p>,
+          <button key="cta" onClick={onEnter} className="btn-cta" style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 18, letterSpacing: 3, background: YELLOW, color: DARK, border: "none", padding: "14px 44px", cursor: "pointer" }}>ENTRA NEL MENU</button>,
+        ].map((child, i) => (
+          <div key={i} className="card-enter" style={{ animationDelay: `${i * 100 + 80}ms` }}>{child}</div>
+        ))}
       </div>
 
       <div style={{
@@ -391,9 +379,12 @@ const CocktailDetail = ({ cocktail, onBack }) => {
 
   return (
     <div style={{
-      opacity: show ? 1 : 0, transition: "opacity .4s ease", padding: "0 0 40px",
+      opacity: show ? 1 : 0,
+      transform: show ? "translateY(0)" : "translateY(20px)",
+      transition: "opacity .5s cubic-bezier(0.25,0.46,0.45,0.94), transform .5s cubic-bezier(0.25,0.46,0.45,0.94)",
+      padding: "0 0 40px",
     }}>
-      <button onClick={onBack} style={{
+      <button onClick={onBack} className="back-btn" style={{
         background: "none", border: "none", color: YELLOW,
         fontFamily: "'Space Mono',monospace", fontSize: 11, letterSpacing: 2,
         cursor: "pointer", padding: "16px 0", display: "flex", alignItems: "center", gap: 6,
@@ -407,6 +398,7 @@ const CocktailDetail = ({ cocktail, onBack }) => {
             <img
               src={cocktail.image}
               alt={cocktail.name}
+              className="img-pop"
               style={{ width: "100%", height: "100%", display: "block", objectFit: "cover" }}
             />
           </div>
@@ -550,9 +542,12 @@ const FoodDetail = ({ item, onBack }) => {
 
   return (
     <div style={{
-      opacity: show ? 1 : 0, transition: "opacity .4s ease", padding: "0 0 40px",
+      opacity: show ? 1 : 0,
+      transform: show ? "translateY(0)" : "translateY(20px)",
+      transition: "opacity .5s cubic-bezier(0.25,0.46,0.45,0.94), transform .5s cubic-bezier(0.25,0.46,0.45,0.94)",
+      padding: "0 0 40px",
     }}>
-      <button onClick={onBack} style={{
+      <button onClick={onBack} className="back-btn" style={{
         background: "none", border: "none", color: YELLOW,
         fontFamily: "'Space Mono',monospace", fontSize: 11, letterSpacing: 2,
         cursor: "pointer", padding: "16px 0", display: "flex", alignItems: "center", gap: 6,
@@ -571,6 +566,7 @@ const FoodDetail = ({ item, onBack }) => {
             <img
               src={item.image}
               alt={item.name}
+              className="img-pop"
               style={{ width: "100%", height: "100%", display: "block", objectFit: "cover" }}
             />
           ) : (
@@ -667,7 +663,7 @@ const MenuScreen = () => {
           <SectionHeader title="Spazio Tempo" svgSrc={asset("/assets/spaziotempo-horizontal.svg")} />
           <div style={{ display: "flex", flexDirection: "column", gap: 5, marginBottom: 28 }}>
             {signatureCocktails.map((c, i) => (
-              <CocktailCard key={c.id} cocktail={c} onClick={() => { setSelected({ section: "signature", index: i }); window.scrollTo(0, 0); }} />
+              <CocktailCard key={c.id} index={i} cocktail={c} onClick={() => { setSelected({ section: "signature", index: i }); window.scrollTo(0, 0); }} />
             ))}
           </div>
 
@@ -687,7 +683,7 @@ const MenuScreen = () => {
           <SectionHeader title="Food" />
           <div style={{ display: "flex", flexDirection: "column", gap: 5, marginBottom: 28 }}>
             {food.map((item, i) => (
-              <FoodCard key={item.id} item={item} onClick={() => { setSelected({ section: "food", index: i }); window.scrollTo(0, 0); }} />
+              <FoodCard key={item.id} index={i} item={item} onClick={() => { setSelected({ section: "food", index: i }); window.scrollTo(0, 0); }} />
             ))}
           </div>
 
@@ -781,7 +777,7 @@ const MenuScreen = () => {
                 display: "flex", alignItems: "center", justifyContent: "center",
                 flexDirection: "column", gap: 3, borderRadius: 2,
               }}>
-                <Ghost size={30} color={PINK} />
+                <span className="ghost-float"><Ghost size={30} color={PINK} /></span>
                 <span style={{
                   fontFamily: "'Bebas Neue',sans-serif", fontSize: 11, color: YELLOW,
                   letterSpacing: 1, lineHeight: 1,
