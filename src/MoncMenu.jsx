@@ -101,26 +101,12 @@ const signatureCocktails = [
 ];
 
 const classicCocktails = [
-  {
-    id: 101, name: "NEGRONI", price: 9,
-    ingredients: ["Gin", "Campari", "Vermouth Rosso"],
-    profile: { acido: 1, dolce: 2, amaro: 4, secco: 2, intenso: 4 },
-  },
-  {
-    id: 102, name: "MOSCOW MULE", price: 8,
-    ingredients: ["Vodka", "Ginger Beer", "Lime", "Angostura"],
-    profile: { acido: 3, dolce: 2, amaro: 1, secco: 2, intenso: 2 },
-  },
-  {
-    id: 103, name: "MARGARITA", price: 9,
-    ingredients: ["Tequila", "Triple Sec", "Lime", "Sale"],
-    profile: { acido: 4, dolce: 2, amaro: 1, secco: 2, intenso: 3 },
-  },
-  {
-    id: 104, name: "APEROL SPRITZ", price: 7,
-    ingredients: ["Aperol", "Prosecco", "Soda", "Arancia"],
-    profile: { acido: 2, dolce: 3, amaro: 2, secco: 1, intenso: 1 },
-  },
+  { id: 101, name: "NEGRONI", price: 8, ingredients: ["Gin", "Campari", "Vermouth Rosso"] },
+  { id: 102, name: "MOSCOW MULE", price: 8, ingredients: ["Vodka", "Ginger Beer", "Lime", "Angostura"] },
+  { id: 103, name: "MARGARITA", price: 8, ingredients: ["Tequila", "Triple Sec", "Lime", "Sale"] },
+  { id: 104, name: "APEROL SPRITZ", price: 8, ingredients: ["Aperol", "Prosecco", "Soda", "Arancia"] },
+  { id: 105, name: "DAIQUIRI", price: 8, ingredients: ["Rum", "Lime", "Zucchero"] },
+  { id: 106, name: "GIN TONIC", price: 8, ingredients: ["Gin", "Acqua Tonica", "Lime"] },
 ];
 
 const softDrinks = [
@@ -131,32 +117,122 @@ const softDrinks = [
   { id: 205, name: "LIMONATA FATTA IN CASA", price: 5, ingredients: ["Limone", "Zucchero", "Menta"] },
 ];
 
+const acque = [
+  { id: 701, name: "NATURALE", price: 2, ingredients: ["50cl"] },
+  { id: 702, name: "FRIZZANTE", price: 2, ingredients: ["50cl"] },
+];
+
+// Food with group labels — items with image are clickable (detail page), others are plain
 const food = [
-  { id: 301, name: "TACOS", price: 6, image: asset("/assets/food/tacos.jpeg"), description: "A scelta tra pollo, pulled pork e veggy.", ingredients: ["Tortilla", "Pollo / Pulled Pork / Veggy", "Guacamole", "Salsa Chili", "Coriandolo"] },
-  { id: 302, name: "BAO", price: 7, image: asset("/assets/food/bao.jpeg"), description: "Soffice panino al vapore con carne sfilacciata.", ingredients: ["Bao al vapore", "Pulled Pork", "Hoisin", "Cetriolo", "Cipollotto"] },
-  { id: 303, name: "NACHOS", price: 6, image: "", description: "Tortilla chips croccanti con le nostre salse.", ingredients: ["Tortilla Chips", "Salsa Cheddar", "Guacamole", "Jalapeño", "Panna Acida"] },
+  { id: 301, name: "PATATINE FRITTE AL TARTUFO", price: 5, group: "DA CONDIVIDERE", image: "", description: "Con pecorino e olio al tartufo", ingredients: [] },
+  { id: 302, name: "PATATINE FRITTE PICCANTI", price: 5, group: "DA CONDIVIDERE", image: "", description: "Con pecorino e olio piccante", ingredients: [] },
+  { id: 303, name: "PALLINE AL JALAPEÑO", price: 4, group: "DA CONDIVIDERE", image: "", description: "", ingredients: [] },
+  { id: 304, name: "NACHOS", price: 4, group: "DA CONDIVIDERE", image: "", description: "Con salsa cheddar, piccante, guacamole", ingredients: ["Tortilla Chips", "Salsa Cheddar", "Guacamole", "Jalapeño"] },
+  { id: 305, name: "TACOS POLLO", price: 4, group: "TACOS", image: asset("/assets/food/tacos.jpeg"), description: "Straccetti di pollo marinati in salsa agrodolce, peperoni, pomodorini, iceberg", ingredients: ["Tortilla", "Pollo", "Salsa Agrodolce", "Peperoni", "Pomodorini", "Iceberg"] },
+  { id: 306, name: "TACOS PULLED PORK", price: 4, group: "TACOS", image: "", description: "Pulled pork marinato, fagioli, cipolla fritta e valeriana", ingredients: ["Tortilla", "Pulled Pork", "Fagioli", "Cipolla Fritta", "Valeriana"] },
+  { id: 307, name: "TACOS VEGETARIANO", price: 4, group: "TACOS", image: "", description: "Patate, zucchine, melanzane, peperoni, salsa guacamole", ingredients: ["Tortilla", "Patate", "Zucchine", "Melanzane", "Guacamole"] },
+  { id: 308, name: "BAO TARTARE", price: 8, group: "BAO", image: asset("/assets/food/bao.jpeg"), description: "Con tartare di fassona, stracciatella, cipolla rossa caramellata, pomodorino giallo confit", ingredients: ["Bao al vapore", "Tartare di Fassona", "Stracciatella", "Cipolla Caramellata", "Pomodorino Giallo"] },
+  { id: 309, name: "MONCLUB", price: 6, group: "MONCLUB", image: "", description: "Club con straccetti di pollo, iceberg, pomodorini, pancetta, formaggio e salsa rosa", ingredients: ["Straccetti di Pollo", "Iceberg", "Pomodorini", "Pancetta", "Formaggio", "Salsa Rosa"] },
 ];
 
 const beer = [
-  { id: 401, name: "ICHNUSA NON FILTRATA", price: 5, ingredients: ["33cl", "Lager", "Sardegna"] },
-  { id: 402, name: "HEINEKEN", price: 4, ingredients: ["33cl", "Lager", "Olanda"] },
-  { id: 403, name: "CORONA", price: 5, ingredients: ["33cl", "Lager", "Messico"] },
-  { id: 404, name: "IPA ARTIGIANALE", price: 6, ingredients: ["40cl", "IPA", "Italia"] },
+  { id: 401, name: "BIONDA", price: 4, ingredients: ["Artigianale"] },
+  { id: 402, name: "RED LAGER", price: 4, ingredients: ["Artigianale"] },
 ];
 
+// Wine with subcategories (calice / bottiglia)
 const wine = [
-  { id: 501, name: "VERMENTINO DI SARDEGNA", price: 6, ingredients: ["Bianco", "Sardegna", "Calice"] },
-  { id: 502, name: "CANNONAU", price: 6, ingredients: ["Rosso", "Sardegna", "Calice"] },
-  { id: 503, name: "PROSECCO", price: 5, ingredients: ["Bollicine", "Veneto", "Calice"] },
-  { id: 504, name: "ROSÉ", price: 6, ingredients: ["Rosato", "Puglia", "Calice"] },
+  {
+    category: "AL CALICE",
+    items: [
+      { name: "VERMENTINO AUDARYA", label: "Bianco", price: 5 },
+      { name: "CANNONAU AUDARYA", label: "Rosso", price: 5 },
+      { name: "AKENTA DRY, ROSÈ", label: "Bolle", price: 5 },
+    ],
+  },
+  {
+    category: "BOTTIGLIA",
+    items: [
+      { name: "VERMENTINO AUDARYA", label: "Bianco", price: 24 },
+      { name: "CANNONAU AUDARYA", label: "Rosso", price: 24 },
+      { name: "AKENTA DRY, ROSÈ", label: "Bolle", price: 24 },
+    ],
+  },
 ];
 
-const spirits = [
-  { id: 601, name: "WHISKY (JACK DANIEL'S)", price: 6, ingredients: ["4cl", "Tennessee", "USA"] },
-  { id: 602, name: "RUM (HAVANA CLUB 7)", price: 6, ingredients: ["4cl", "Añejo", "Cuba"] },
-  { id: 603, name: "GIN (HENDRICK'S)", price: 7, ingredients: ["4cl", "Premium", "Scozia"] },
-  { id: 604, name: "TEQUILA (JOSE CUERVO)", price: 6, ingredients: ["4cl", "Reposado", "Messico"] },
-  { id: 605, name: "GRAPPA SARDA", price: 5, ingredients: ["4cl", "Tradizionale", "Sardegna"] },
+// Spirits grouped by category
+const distillati = [
+  {
+    category: "VODKA",
+    items: [
+      { name: "SKY", price: 4 },
+      { name: "ABSOLUTE", price: 5 },
+      { name: "TITO'S HANDMADE", price: 7 },
+      { name: "CIROC", price: 7 },
+      { name: "BELUGA", price: 8 },
+    ],
+  },
+  {
+    category: "GIN",
+    items: [
+      { name: "BEEFEATER", price: 4 },
+      { name: "PLYMOUTH", price: 5 },
+      { name: "GRIFU", price: 7 },
+      { name: "GIN MALFI POMPELMO ROSA", price: 8 },
+      { name: "SCAPEGRACE BLACK GIN", price: 9 },
+      { name: "GIN 400 CONIGLI COFFEE", price: 10 },
+    ],
+  },
+  {
+    category: "RUM",
+    items: [
+      { name: "BACARDI BIANCO", price: 4 },
+      { name: "MYER'S JAMAICAN", price: 5 },
+      { name: "HAVANA ESPECIAL", price: 5 },
+      { name: "CPT MORGAN SPICED", price: 6 },
+      { name: "DON PAPA", price: 7 },
+      { name: "HAVANA 7", price: 7 },
+      { name: "KRAKEN", price: 7 },
+    ],
+  },
+  {
+    category: "TEQUILA",
+    items: [
+      { name: "CAZADORES", price: 4 },
+      { name: "PATRON SILVER", price: 8 },
+      { name: "PATRON ANEJO", price: 8 },
+      { name: "PATRON REPOSADO", price: 8 },
+    ],
+  },
+  {
+    category: "WHISKY",
+    items: [
+      { name: "BULLEIT BOURBON", price: 6 },
+      { name: "BULLEIT RYE", price: 6 },
+      { name: "GLENDFIDDICH 12Y", price: 10 },
+      { name: "LAPHROAIG", price: 11 },
+      { name: "NIKKA", price: 12 },
+    ],
+  },
+  {
+    category: "GRAPPE",
+    items: [
+      { name: "GRAPPA BIANCA", price: 4 },
+      { name: "GRAPPA BARRIQUE", price: 5 },
+    ],
+  },
+  {
+    category: "AMARI",
+    items: [
+      { name: "MONTENEGRO", price: 4 },
+      { name: "AMARO DEL CAPO", price: 4 },
+      { name: "LIQUIRIZIA", price: 4 },
+      { name: "LIMONCINO", price: 4 },
+      { name: "JÄGERMEISTER", price: 5 },
+      { name: "MIRTO BIANCO", price: 5 },
+      { name: "MIRTO ROSSO", price: 5 },
+    ],
+  },
 ];
 
 /* ─── COMPONENTS ─── */
@@ -213,7 +289,7 @@ const SimpleItem = ({ item }) => (
     background: "#141414", border: "1px solid #1e1e1e", padding: "14px 18px",
   }}>
     <div style={{
-      display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4,
+      display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: item.ingredients?.length ? 4 : 0,
     }}>
       <h3 style={{
         fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(16px,4vw,22px)",
@@ -225,14 +301,96 @@ const SimpleItem = ({ item }) => (
         flexShrink: 0, marginLeft: 8,
       }}>{item.price}€</span>
     </div>
-    <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
-      {item.ingredients.map((ing, j) => (
-        <span key={j} style={{
-          fontFamily: "'Absans',sans-serif", fontSize: 10, color: "#666",
-          background: "#1e1e1e", padding: "2px 7px", borderRadius: 2,
-        }}>{ing}</span>
+    {item.ingredients?.length > 0 && (
+      <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
+        {item.ingredients.map((ing, j) => (
+          <span key={j} style={{
+            fontFamily: "'Absans',sans-serif", fontSize: 10, color: "#666",
+            background: "#1e1e1e", padding: "2px 7px", borderRadius: 2,
+          }}>{ing}</span>
+        ))}
+      </div>
+    )}
+    {item.description && !item.ingredients?.length && (
+      <p style={{ fontFamily: "'Absans',sans-serif", fontSize: 11, color: "#555", margin: 0, lineHeight: 1.4 }}>{item.description}</p>
+    )}
+  </div>
+);
+
+/* Grouped spirit/distillati display */
+const SpiritGroup = ({ category, items }) => (
+  <div style={{ background: "#141414", border: "1px solid #1e1e1e" }}>
+    <div style={{
+      padding: "8px 18px 7px",
+      borderBottom: "1px solid #1a1a1a",
+    }}>
+      <span style={{
+        fontFamily: "'Space Mono',monospace", fontSize: 8, letterSpacing: 3,
+        color: "#555", textTransform: "uppercase",
+      }}>{category}</span>
+    </div>
+    <div style={{ padding: "10px 18px 12px" }}>
+      {items.map((item, i) => (
+        <div key={i} style={{
+          display: "flex", justifyContent: "space-between", alignItems: "center",
+          paddingBottom: i < items.length - 1 ? 7 : 0,
+          borderBottom: i < items.length - 1 ? "1px solid #191919" : "none",
+          marginBottom: i < items.length - 1 ? 7 : 0,
+        }}>
+          <span style={{
+            fontFamily: "'Absans',sans-serif", fontSize: 14, color: "#ccc", letterSpacing: 0.3,
+          }}>{item.name}</span>
+          <span style={{
+            fontFamily: "'Bebas Neue',sans-serif", fontSize: 16, color: YELLOW,
+            background: `${YELLOW}12`, padding: "1px 8px", whiteSpace: "nowrap", marginLeft: 12,
+          }}>{item.price}€</span>
+        </div>
       ))}
     </div>
+  </div>
+);
+
+/* Wine subcategory display */
+const WineSection = ({ category, items }) => (
+  <div style={{ background: "#141414", border: "1px solid #1e1e1e" }}>
+    <div style={{ padding: "8px 18px 7px", borderBottom: "1px solid #1a1a1a" }}>
+      <span style={{
+        fontFamily: "'Space Mono',monospace", fontSize: 8, letterSpacing: 3,
+        color: "#555", textTransform: "uppercase",
+      }}>{category}</span>
+    </div>
+    <div style={{ padding: "10px 18px 12px" }}>
+      {items.map((item, i) => (
+        <div key={i} style={{
+          display: "flex", justifyContent: "space-between", alignItems: "center",
+          paddingBottom: i < items.length - 1 ? 7 : 0,
+          borderBottom: i < items.length - 1 ? "1px solid #191919" : "none",
+          marginBottom: i < items.length - 1 ? 7 : 0,
+        }}>
+          <div>
+            <span style={{
+              fontFamily: "'Space Mono',monospace", fontSize: 7, color: "#444",
+              letterSpacing: 1, display: "block", marginBottom: 2, textTransform: "uppercase",
+            }}>{item.label}</span>
+            <span style={{ fontFamily: "'Absans',sans-serif", fontSize: 14, color: "#ccc" }}>{item.name}</span>
+          </div>
+          <span style={{
+            fontFamily: "'Bebas Neue',sans-serif", fontSize: 16, color: YELLOW,
+            background: `${YELLOW}12`, padding: "1px 8px", whiteSpace: "nowrap", marginLeft: 12,
+          }}>{item.price}€</span>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+/* Food group label */
+const FoodGroupLabel = ({ label }) => (
+  <div style={{ padding: "10px 4px 4px" }}>
+    <span style={{
+      fontFamily: "'Space Mono',monospace", fontSize: 8, letterSpacing: 3,
+      color: "#444", textTransform: "uppercase",
+    }}>{label}</span>
   </div>
 );
 
@@ -621,7 +779,7 @@ const FoodDetail = ({ item, onBack }) => {
 
 /* ─── MAIN MENU SCREEN ─── */
 const MenuScreen = () => {
-  const [selected, setSelected] = useState(null); // { section, index } or null
+  const [selected, setSelected] = useState(null);
   const [vis, setVis] = useState(false);
   useEffect(() => { setTimeout(() => setVis(true), 100); }, []);
 
@@ -637,7 +795,6 @@ const MenuScreen = () => {
   const getItemFromSelected = () => {
     if (!selected) return null;
     if (selected.section === "signature") return signatureCocktails[selected.index];
-    if (selected.section === "classic") return classicCocktails[selected.index];
     if (selected.section === "food") return food[selected.index];
     return null;
   };
@@ -676,10 +833,28 @@ const MenuScreen = () => {
             ))}
           </div>
 
-          {/* ─── CLASSIC COCKTAILS ─── */}
-          <SectionHeader title="Cocktails" />
+          {/* ─── CLASSIC COCKTAILS IBA ─── */}
+          <SectionHeader title="Cocktail Classici IBA" />
           <div style={{ display: "flex", flexDirection: "column", gap: 5, marginBottom: 28 }}>
+            {/* Fixed price badge */}
+            <div style={{
+              display: "flex", alignItems: "center", gap: 8, padding: "8px 18px",
+              background: `${YELLOW}10`, border: `1px solid ${YELLOW}20`,
+            }}>
+              <span style={{ fontFamily: "'Space Mono',monospace", fontSize: 8, letterSpacing: 2, color: "#666" }}>
+                PREZZO FISSO
+              </span>
+              <span style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 20, color: YELLOW }}>8€</span>
+            </div>
             {classicCocktails.map(c => <SimpleItem key={c.id} item={c} />)}
+          </div>
+
+          {/* ─── DISTILLATI ─── */}
+          <SectionHeader title="Distillati" />
+          <div style={{ display: "flex", flexDirection: "column", gap: 5, marginBottom: 28 }}>
+            {distillati.map(group => (
+              <SpiritGroup key={group.category} category={group.category} items={group.items} />
+            ))}
           </div>
 
           {/* ─── SOFT DRINKS ─── */}
@@ -688,16 +863,14 @@ const MenuScreen = () => {
             {softDrinks.map(item => <SimpleItem key={item.id} item={item} />)}
           </div>
 
-          {/* ─── FOOD ─── */}
-          <SectionHeader title="Food" />
+          {/* ─── ACQUE ─── */}
+          <SectionHeader title="Acque" />
           <div style={{ display: "flex", flexDirection: "column", gap: 5, marginBottom: 28 }}>
-            {food.map((item, i) => (
-              <FoodCard key={item.id} index={i} item={item} onClick={() => { setSelected({ section: "food", index: i }); window.scrollTo(0, 0); }} />
-            ))}
+            {acque.map(item => <SimpleItem key={item.id} item={item} />)}
           </div>
 
           {/* ─── BEER ─── */}
-          <SectionHeader title="Birre" />
+          <SectionHeader title="Birre Artigianali" />
           <div style={{ display: "flex", flexDirection: "column", gap: 5, marginBottom: 28 }}>
             {beer.map(item => <SimpleItem key={item.id} item={item} />)}
           </div>
@@ -705,16 +878,30 @@ const MenuScreen = () => {
           {/* ─── WINE ─── */}
           <SectionHeader title="Vini" />
           <div style={{ display: "flex", flexDirection: "column", gap: 5, marginBottom: 28 }}>
-            {wine.map(item => <SimpleItem key={item.id} item={item} />)}
+            {wine.map(section => (
+              <WineSection key={section.category} category={section.category} items={section.items} />
+            ))}
           </div>
 
-          {/* ─── SPIRITS ─── */}
-          <SectionHeader title="Spirits" />
+          {/* ─── FOOD ─── */}
+          <SectionHeader title="Food" />
           <div style={{ display: "flex", flexDirection: "column", gap: 5, marginBottom: 28 }}>
-            {spirits.map(item => <SimpleItem key={item.id} item={item} />)}
+            {food.flatMap((item, i) => {
+              const showGroupLabel = item.group !== food[i - 1]?.group;
+              const elements = [];
+              if (showGroupLabel) {
+                elements.push(<FoodGroupLabel key={`g-${item.group}`} label={item.group} />);
+              }
+              elements.push(
+                item.image
+                  ? <FoodCard key={item.id} index={i} item={item} onClick={() => { setSelected({ section: "food", index: i }); window.scrollTo(0, 0); }} />
+                  : <SimpleItem key={item.id} item={item} />
+              );
+              return elements;
+            })}
           </div>
 
-          {/* Tapas promo */}
+          {/* AperiMONC promo */}
           <div style={{
             marginTop: 20, background: "#141414", border: `1px solid ${PINK}30`,
             padding: "22px 18px", textAlign: "center",
@@ -736,25 +923,52 @@ const MenuScreen = () => {
                 }}>APERIMONC</span>
               </div>
             </div>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, marginBottom: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, marginBottom: 14 }}>
               <Ghost size={18} color={PINK} />
               <span style={{
                 fontFamily: "'Space Mono',monospace", fontSize: 8, letterSpacing: 3, color: PINK,
                 textTransform: "uppercase",
-              }}>Offerta Speciale</span>
+              }}>Dalle 18:00 alle 21:00</span>
               <Ghost size={18} color={PINK} />
             </div>
-            <p style={{
-              fontFamily: "'Bebas Neue',sans-serif", fontSize: 24, color: "white",
-              margin: "0 0 4px", letterSpacing: 1,
-            }}>COCKTAIL / VINO / BIRRA</p>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10 }}>
-              <span style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 44, color: YELLOW }}>€12</span>
-              <span style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 20, color: PINK }}>+ 3 TAPAS!</span>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              <div style={{
+                display: "flex", justifyContent: "space-between", alignItems: "center",
+                background: "#1a1a1a", padding: "12px 16px",
+              }}>
+                <div style={{ flex: 1, textAlign: "left" }}>
+                  <p style={{
+                    fontFamily: "'Bebas Neue',sans-serif", fontSize: 16, color: "white",
+                    margin: "0 0 2px", letterSpacing: 1,
+                  }}>DRINK BASE / VINO / BIRRA</p>
+                  <p style={{
+                    fontFamily: "'Absans',sans-serif", fontSize: 10, color: "#555", margin: 0,
+                  }}>Nachos · Jalapeño Bites · 1 Tacos</p>
+                </div>
+                <span style={{
+                  fontFamily: "'Bebas Neue',sans-serif", fontSize: 36, color: YELLOW,
+                  marginLeft: 16, lineHeight: 1,
+                }}>€12</span>
+              </div>
+              <div style={{
+                display: "flex", justifyContent: "space-between", alignItems: "center",
+                background: "#1a1a1a", padding: "12px 16px",
+              }}>
+                <div style={{ flex: 1, textAlign: "left" }}>
+                  <p style={{
+                    fontFamily: "'Bebas Neue',sans-serif", fontSize: 16, color: "white",
+                    margin: "0 0 2px", letterSpacing: 1,
+                  }}>DRINK SIGNATURE</p>
+                  <p style={{
+                    fontFamily: "'Absans',sans-serif", fontSize: 10, color: "#555", margin: 0,
+                  }}>Nachos · Jalapeño Bites · 1 Tacos</p>
+                </div>
+                <span style={{
+                  fontFamily: "'Bebas Neue',sans-serif", fontSize: 36, color: PINK,
+                  marginLeft: 16, lineHeight: 1,
+                }}>€15</span>
+              </div>
             </div>
-            <p style={{
-              fontFamily: "'Absans',sans-serif", fontSize: 10, color: "#555", marginTop: 8,
-            }}>Tacos · Nachos · Palline di Jalapeño · Guacamole · Salsa Chili · Salsa Cheddar</p>
           </div>
 
           {/* Fidelity */}
