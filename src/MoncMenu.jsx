@@ -110,11 +110,12 @@ const classicCocktails = [
 ];
 
 const softDrinks = [
-  { id: 201, name: "COCA COLA", price: 3, ingredients: ["330ml"] },
-  { id: 202, name: "ACQUA TONICA", price: 3, ingredients: ["Fever-Tree", "200ml"] },
-  { id: 203, name: "GINGER BEER", price: 4, ingredients: ["Fever-Tree", "200ml"] },
-  { id: 204, name: "SUCCO DI FRUTTA", price: 3, ingredients: ["Pesca", "Albicocca", "ACE"] },
-  { id: 205, name: "LIMONATA FATTA IN CASA", price: 5, ingredients: ["Limone", "Zucchero", "Menta"] },
+  { id: 201, name: "COCA COLA", price: null, ingredients: [] },
+  { id: 202, name: "COCA COLA ZERO", price: null, ingredients: [] },
+  { id: 203, name: "FANTA", price: null, ingredients: [] },
+  { id: 204, name: "LEMON SODA", price: null, ingredients: [] },
+  { id: 205, name: "ORANGE SODA", price: null, ingredients: [] },
+  { id: 206, name: "RED BULL", price: null, ingredients: [] },
 ];
 
 const acque = [
@@ -299,7 +300,7 @@ const SimpleItem = ({ item }) => (
         fontFamily: "'Bebas Neue',sans-serif", fontSize: 18, color: YELLOW,
         background: `${YELLOW}12`, padding: "2px 10px", whiteSpace: "nowrap",
         flexShrink: 0, marginLeft: 8,
-      }}>{item.price}€</span>
+      }}>{item.price != null ? `${item.price}€` : "—"}</span>
     </div>
     {item.ingredients?.length > 0 && (
       <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
@@ -325,8 +326,8 @@ const SpiritGroup = ({ category, items }) => (
       borderBottom: "1px solid #1a1a1a",
     }}>
       <span style={{
-        fontFamily: "'Space Mono',monospace", fontSize: 8, letterSpacing: 3,
-        color: "#555", textTransform: "uppercase",
+        fontFamily: "'Bebas Neue',sans-serif", fontSize: 18, letterSpacing: 3,
+        color: "#ccc", textTransform: "uppercase",
       }}>{category}</span>
     </div>
     <div style={{ padding: "10px 18px 12px" }}>
@@ -893,9 +894,7 @@ const MenuScreen = () => {
                 elements.push(<FoodGroupLabel key={`g-${item.group}`} label={item.group} />);
               }
               elements.push(
-                item.image
-                  ? <FoodCard key={item.id} index={i} item={item} onClick={() => { setSelected({ section: "food", index: i }); window.scrollTo(0, 0); }} />
-                  : <SimpleItem key={item.id} item={item} />
+                <FoodCard key={item.id} index={i} item={item} onClick={() => { setSelected({ section: "food", index: i }); window.scrollTo(0, 0); }} />
               );
               return elements;
             })}
